@@ -1,0 +1,14 @@
+import heapq
+def dijkstra(g, start):
+    d = {n: float('inf') for n in g}; d[start] = 0; pq = [(0, start)]
+    while pq:
+        dist, u = heapq.heappop(pq)
+        for v, w in g[u]:
+            if dist + w < d[v]: d[v] = dist + w; heapq.heappush(pq, (d[v], v))
+    return d
+
+g1 = {0: [(1,4), (2,1)], 1: [(3,1)], 2: [(1,2), (3,5), (4,8)], 3: [(4,3), (5,6)], 4: [(5,2)], 5: []}
+def bai_12(g, s, k, t):
+    d_s = dijkstra(g, s); d_k = dijkstra(g, k)
+    print(f"Tổng chi phí đi từ {s} qua {k} tới {t}: {d_s[k] + d_k[t]}")
+bai_12(g1, 0, 2, 5)

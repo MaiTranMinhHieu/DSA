@@ -1,0 +1,12 @@
+def chon_cai_dat_dijkstra(so_dinh, so_canh):
+    # Quy ước: nếu số cạnh lớn hơn 25% số cạnh tối đa thì coi là đồ thị dày
+    mat_do = so_canh / (so_dinh * (so_dinh - 1) / 2)
+    
+    if mat_do > 0.25:
+        return "Nên dùng mảng (O(V^2)) - Phù hợp cho đồ thị dày."
+    else:
+        return "Nên dùng Binary Heap (O(E log V)) - Phù hợp cho đồ thị thưa."
+
+# Chạy thử với đồ thị có 10 đỉnh
+print("Đồ thị 10 đỉnh, 5 cạnh:", chon_cai_dat_dijkstra(10, 5))
+print("Đồ thị 10 đỉnh, 40 cạnh:", chon_cai_dat_dijkstra(10, 40))

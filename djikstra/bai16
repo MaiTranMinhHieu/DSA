@@ -1,0 +1,10 @@
+import heapq
+def bai_16(g, costs, s, t):
+    dist = {n: float('inf') for n in g}; dist[s] = costs[s]
+    pq = [(costs[s], s)]
+    while pq:
+        d, u = heapq.heappop(pq)
+        for v, w in g[u]:
+            if d + w + costs[v] < dist[v]: dist[v] = d + w + costs[v]; heapq.heappush(pq, (dist[v], v))
+    print(f"Chi phí bao gồm trọng số đỉnh tới {t}: {dist[t]}")
+bai_16({0: [(1, 2)], 1: [(2, 3)], 2: []}, {0: 10, 1: 20, 2: 30}, 0, 2)

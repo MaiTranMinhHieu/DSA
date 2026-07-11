@@ -1,0 +1,13 @@
+import heapq
+g1 = {0: [(1,4), (2,1)], 1: [(3,1)], 2: [(1,2), (3,5), (4,8)], 3: [(4,3), (5,6)], 4: [(5,2)], 5: []}
+def bai_14(g, s, t):
+    d1 = {n: float('inf') for n in g}; d2 = {n: float('inf') for n in g}; d1[s] = 0
+    pq = [(0, s)]
+    while pq:
+        d, u = heapq.heappop(pq)
+        for v, w in g[u]:
+            nd = d + w
+            if nd < d1[v]: d2[v] = d1[v]; d1[v] = nd; heapq.heappush(pq, (nd, v))
+            elif d1[v] < nd < d2[v]: d2[v] = nd; heapq.heappush(pq, (nd, v))
+    print(f"Khoảng cách đường ngắn nhì tới {t}: {d2[t]}")
+bai_14(g1, 0, 4)

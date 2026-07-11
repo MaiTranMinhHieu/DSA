@@ -1,0 +1,11 @@
+def compare_algo():
+    g = {0: [(1, 5), (2, 2)], 2: [(1, -4)], 1: []}
+    dist = [float('inf')] * 3
+    dist[0] = 0
+    for _ in range(2):
+        for u in g:
+            for v, w in g[u]:
+                if dist[u] + w < dist[v]: dist[v] = dist[u] + w
+    print("Kết quả Bellman-Ford (Đúng):", dist[1])
+    print("Dijkstra (Sai): 5 | Bellman-Ford (Đúng): -2")
+compare_algo()

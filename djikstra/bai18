@@ -1,0 +1,31 @@
+import heapq
+
+def dijkstra_canh_am(graph, start):
+    dist = {n: float('inf') for n in graph}
+    dist[start] = 0
+    visited = set()
+    pq = [(0, start)]
+    
+    while pq:
+        d, u = heapq.heappop(pq)
+        if u in visited: continue
+        visited.add(u)
+        for v, w in graph[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
+    return dist
+
+# Đồ thị G có cạnh âm (2 -> 1 với trọng số -4)
+graph_am = {
+    0: [(1, 5), (2, 2)],
+    1: [],
+    2: [(1, -4)]
+}
+
+ket_qua = dijkstra_canh_am(graph_am, 0)
+
+# Chạy thử
+print("Kết quả dist[1] sau khi chạy Dijkstra:")
+print(ket_qua[1])
+print("Kết quả đúng phải là: -2")

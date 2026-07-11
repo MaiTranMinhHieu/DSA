@@ -1,0 +1,16 @@
+def minh_chung_dijkstra():
+    # Giả định: u là đỉnh có dist[u] nhỏ nhất trong hàng đợi
+    # Nếu có đường vòng qua v (chưa thăm): dist[v] + weight(v, u)
+    # Vì v chưa thăm nên dist[v] >= dist[u]
+    # Vì weight >= 0 nên dist[v] + weight(v, u) >= dist[u]
+    
+    u_val = 10
+    v_val = 15
+    weight = 2
+    
+    print("Minh chứng logic:")
+    print(f"dist[u] = {u_val}, dist[v] = {v_val}")
+    print(f"Tổng đường vòng qua v = dist[v] + weight = {v_val + weight}")
+    print(f"Kết luận: {v_val + weight} >= {u_val} -> Không tồn tại đường ngắn hơn.")
+
+minh_chung_dijkstra()

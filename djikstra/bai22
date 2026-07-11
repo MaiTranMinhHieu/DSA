@@ -1,0 +1,9 @@
+import heapq
+def bai_22(g, s, t, max_k):
+    pq = [(0, s, 0)]
+    while pq:
+        d, u, k = heapq.heappop(pq)
+        if u == t: print(f"Chi phí tối đa {max_k} cạnh: {d}"); return
+        if k < max_k:
+            for v, w in g[u]: heapq.heappush(pq, (d + w, v, k + 1))
+bai_22({0: [(1, 10), (2, 2)], 2: [(1, 2)], 1: []}, 0, 1, 1)
