@@ -1,0 +1,22 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverseList(head):
+    prev, curr = None, head
+    while curr:
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev
+
+head = ListNode(1, ListNode(2, ListNode(3, ListNode(4))))
+rev_head = reverseList(head)
+
+res_list = []
+while rev_head:
+    res_list.append(rev_head.val)
+    rev_head = rev_head.next
+print(res_list)

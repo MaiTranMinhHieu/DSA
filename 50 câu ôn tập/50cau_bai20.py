@@ -17,3 +17,11 @@ def dijkstra(graph, start):
                 heapq.heappush(pq, (dist, neighbor))
                 
     return distances
+
+graph = {
+    'A': [('B', 4), ('C', 1)],
+    'B': [('D', 1)],
+    'C': [('B', 2), ('D', 5)],
+    'D': []
+}
+print(dijkstra(graph, 'A'))

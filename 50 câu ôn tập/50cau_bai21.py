@@ -9,3 +9,6 @@ def isValid(s: str) -> bool:
         else:
             stack.append(char)
     return not stack
+
+print(isValid("()[]{}"))
+print(isValid("(]"))

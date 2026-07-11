@@ -1,0 +1,17 @@
+def detectCycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            slow = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
+    return None
+
+n1 = ListNode(3); n2 = ListNode(2); n3 = ListNode(0); n4 = ListNode(-4)
+n1.next = n2; n2.next = n3; n3.next = n4; n4.next = n2 
+cycle_node = detectCycle(n1)
+print(cycle_node.val if cycle_node else "None")

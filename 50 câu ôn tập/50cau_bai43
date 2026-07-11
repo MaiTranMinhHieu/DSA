@@ -1,0 +1,32 @@
+class DynamicHashTable:
+    def __init__(self, capacity=4):
+        self.capacity = capacity
+        self.size = 0
+        self.table = [[] for _ in range(capacity)]
+        
+    def put(self, key, value):
+        if self.size / self.capacity > 0.75:
+            self._rehash()
+        idx = hash(key) % self.capacity
+        for i, kv in enumerate(self.table[idx]):
+            if kv[0] == key:
+                self.table[idx][i] = (key, value)
+                return
+        self.table[idx].append((key, value))
+        self.size += 1
+        
+    def _rehash(self):
+        old_table = self.table
+        self.capacity *= 2
+        self.table = [[] for _ in range(self.capacity)]
+        self.size = 0
+        for bucket in old_table:
+            for k, v in bucket:
+                self.put(k, v)
+
+dht = DynamicHashTable(4)
+dht.put(1, 1)
+dht.put(2, 2)
+dht.put(3, 3)
+dht.put(4, 4)
+print(dht.capacity)

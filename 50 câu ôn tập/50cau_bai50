@@ -1,0 +1,29 @@
+import hashlib
+
+class BloomFilter:
+    def __init__(self, size, hash_count):
+        self.size = size
+        self.hash_count = hash_count
+        self.bit_array = [0] * size
+        
+    def _hashes(self, item):
+        res = []
+        for i in range(self.hash_count):
+            h = int(hashlib.md5((str(i) + item).encode()).hexdigest(), 16)
+            res.append(h % self.size)
+        return res
+        
+    def add(self, item):
+        for i in self._hashes(item):
+            self.bit_array[i] = 1
+            
+    def check(self, item):
+        for i in self._hashes(item):
+            if self.bit_array[i] == 0:
+                return False
+        return True
+
+bf = BloomFilter(100, 3)
+bf.add("hello")
+print(bf.check("hello"))
+print(bf.check("world"))
